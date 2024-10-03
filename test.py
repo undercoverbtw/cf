@@ -29,8 +29,8 @@ def get_chromium_options(browser_path: str, arguments: list) -> ChromiumOptions:
     username = "aangympq"
     password = "xev6loydcusc"
     
-    proxy = f"{host}:{port}"
-    proxy_auth = f"{username}:{password}"
+    proxy = f"{username}:{password}@{host}:{port}"
+    proxy_auth = f"ad"
     
     options = ChromiumOptions()
     
