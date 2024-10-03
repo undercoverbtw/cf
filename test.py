@@ -27,7 +27,7 @@ def get_chromium_options(browser_path: str, arguments: list, proxy_server_url: s
     
     # Set up proxy if provided
     if proxy_server_url:
-        options.set_argument(f'--proxy-server={proxy_server_url}')
+        options.add_argument(f'--proxy-server={proxy_server_url}')
     
     for argument in arguments:
         options.set_argument(argument)
