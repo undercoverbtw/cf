@@ -36,7 +36,7 @@ def get_chromium_options(browser_path: str, arguments: list) -> ChromiumOptions:
     
     options.set_argument('--auto-open-devtools-for-tabs', 'true') # we don't need this anymore
  # Set the proxy with authentication
-    options.set_argument(f'--proxy-server=http://{proxy_auth}:{proxy}')
+    options.set_argument(f'--proxy-server=http://{proxy}')
     options.set_paths(browser_path=browser_path)
     for argument in arguments:
         options.set_argument(argument)
@@ -79,6 +79,10 @@ def main():
     # Initialize the browser
     driver = ChromiumPage(addr_or_opts=options)
     try:
+        username = "lol"
+        password = "xd"
+        
+        driver.authenticate(username, password);
         logging.info('Navigating to the demo page.')
         driver.get('https://nopecha.com/demo/cloudflare')
 
