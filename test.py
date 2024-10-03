@@ -93,7 +93,7 @@ def main():
         logging.error("An error occurred: %s", str(e))
     finally:
         logging.info('Closing the browser.')
-        driver.quit()
+       
         if isHeadless:
             display.stop()
 
