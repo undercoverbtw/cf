@@ -90,7 +90,7 @@ with open(f"{PROXY_FOLDER}/background.js","w") as f:
     f.write(background_js)   
     
     
-  options.set_argument(f"--load-extension={PROXY_FOLDER}")  
+  options.set_argument(f'--load-extension={PROXY_FOLDER}')  
     for argument in arguments:
         options.set_argument(argument)
     return options
