@@ -14,19 +14,26 @@ logging.basicConfig(
     ]
 )
 
-def get_chromium_options(browser_path: str, arguments: list) -> ChromiumOptions:
+def get_chromium_options(browser_path: str, arguments: list, proxy: str = None) -> ChromiumOptions:
     """
-    Configures and returns Chromium options.
+    Configures and returns Chromium options, including proxy settings.
     
     :param browser_path: Path to the Chromium browser executable.
     :param arguments: List of arguments for the Chromium browser.
+    :param proxy: Proxy address in the form 'host:port', with optional 'username:password@host:port'.
     :return: Configured ChromiumOptions instance.
     """
     options = ChromiumOptions()
-    options.set_argument('--auto-open-devtools-for-tabs', 'true') # we don't need this anymore
+    options.set_argument('--auto-open-devtools-for-tabs', 'true')  # we don't need this anymore
     options.set_paths(browser_path=browser_path)
+    
     for argument in arguments:
         options.set_argument(argument)
+    
+    if proxy:
+        # Set the proxy argument for Chromium
+        options.set_argument(f'--proxy-server={proxy}')
+    
     return options
 
 def main():
@@ -35,7 +42,6 @@ def main():
     
     if isHeadless:
         from pyvirtualdisplay import Display
-
         display = Display(visible=0, size=(1920, 1080))
         display.start()
 
@@ -43,6 +49,9 @@ def main():
     
     # Windows Example
     # browser_path = os.getenv('CHROME_PATH', r"C:/Program Files/Google/Chrome/Application/chrome.exe")
+
+    # Optional: Add proxy from environment variable
+    proxy = os.getenv('PROXY', 'rrest751_gmail_com-country-any-sid-bgnirgzi9anklat-filter-medium:bbfefr2wyj@gate.nodemaven.com:8080')  # Example: 'username:password@proxy_host:proxy_port' or 'proxy_host:proxy_port'
 
     # Arguments to make the browser better for automation and less detectable.
     arguments = [
@@ -61,7 +70,7 @@ def main():
         "-accept-lang=en-US",
     ]
 
-    options = get_chromium_options(browser_path, arguments)
+    options = get_chromium_options(browser_path, arguments, proxy)
 
     # Initialize the browser
     driver = ChromiumPage(addr_or_opts=options)
@@ -73,9 +82,8 @@ def main():
         logging.info('Starting Cloudflare bypass.')
         cf_bypasser = CloudflareBypasser(driver)
 
-        # If you are solving an in-page captcha (like the one here: https://seleniumbase.io/apps/turnstile), use cf_bypasser.click_verification_button() directly instead of cf_bypasser.bypass().
-        # It will automatically locate the button and click it. Do your own check if needed.
-
+        # If you are solving an in-page captcha (like the one here: https://seleniumbase.io/apps/turnstile),
+        # use cf_bypasser.click_verification_button() directly instead of cf_bypasser.bypass().
         cf_bypasser.bypass()
 
         logging.info("Enjoy the content!")
