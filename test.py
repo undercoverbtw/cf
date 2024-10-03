@@ -47,7 +47,9 @@ def main():
     browser_path = os.getenv('CHROME_PATH', "/usr/bin/google-chrome")
 
     # Proxy URL (you can replace this with your actual proxy URL)
-    proxy_server_url = 'rrest751_gmail_com-country-any-sid-puguczcek6urx5-filter-medium:bbfefr2wyj@gate.nodemaven.com:8080'
+    proxy_server_url = 'gate.nodemaven.com:8080:rrest751_gmail_com-country-any-sid-omljulpnc4ih9da-filter-medium:bbfefr2wyj'
+
+
 
     # Browser arguments to make the browser better for automation and less detectable
     arguments = [
