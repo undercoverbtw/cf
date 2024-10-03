@@ -21,6 +21,12 @@ def get_chromium_options(browser_path: str, arguments: list) -> ChromiumOptions:
     :param arguments: List of arguments for the Chromium browser.
     :return: Configured ChromiumOptions instance.
     """
+
+    PROXY = "rrest751_gmail_com-country-any-sid-m0s83kbu1i6prjcc98eo-filter-medium:bbfefr2wyj@gate.nodemaven.com:8080" # IP:PORT or HOST:PORT
+
+options.add_argument('--proxy-server=%s' % PROXY)
+
+
     options = ChromiumOptions()
     options.set_argument('--auto-open-devtools-for-tabs', 'true') # we don't need this anymore
     options.set_paths(browser_path=browser_path)
