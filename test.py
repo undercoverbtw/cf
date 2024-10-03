@@ -77,8 +77,8 @@ def main():
 
         
   driver.authenticate({        
-        username: f'rrest751_gmail_com-country-any-sid-gpznmocq-filter-medium',
-        password: f'bbfefr2wyj'
+        username: 'rrest751_gmail_com-country-any-sid-gpznmocq-filter-medium',
+        password: 'bbfefr2wyj',
  })
 
         logging.info('Navigating to the demo page.')
