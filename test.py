@@ -31,13 +31,16 @@ def get_chromium_options(browser_path: str, arguments: list) -> ChromiumOptions:
     
     proxy = "{username}:{password}@{host}:{port}"
     proxy_auth = f"adad"
+
+      # Path to the Chrome extension that handles proxy authentication
+    extension_path = ''
     
     options = ChromiumOptions()
     
     options.set_argument('--auto-open-devtools-for-tabs', 'true') # we don't need this anymore
  # Set the proxy with authentication
-    options.set_argument(f'--proxy-server=http://{proxy}')
     options.set_paths(browser_path=browser_path)
+     options.add_extension(extension_path)
     for argument in arguments:
         options.set_argument(argument)
     return options
