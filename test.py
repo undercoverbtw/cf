@@ -13,7 +13,7 @@ logging.basicConfig(
     ]
 )
 
-def get_chromium_options(browser_path: str, arguments: list, proxy_server_url: str = None) -> ChromiumOptions:
+def get_chromium_options(browser_path: str, arguments: list, proxy_server_url: str = true) -> ChromiumOptions:
     """
     Configures and returns Chromium options, including proxy settings if provided.
     
