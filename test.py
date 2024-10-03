@@ -23,7 +23,7 @@ def get_chromium_options(browser_path: str, arguments: list) -> ChromiumOptions:
     :param arguments: List of arguments for the Chromium browser.
     :return: Configured ChromiumOptions instance.
     """
-     host = "31.223.188.160"
+    host = "31.223.188.160"
     port = "5837"
     username = "aangympq"
     password = "xev6loydcusc"
