@@ -73,7 +73,7 @@ def main():
     driver = ChromiumPage(addr_or_opts=options)
     try:
         logging.info('Navigating to the demo page.')
-        driver.get('https://gota.io/web')
+        driver.get('https://whatsmyip.org')
 
         # Where the bypass starts
         logging.info('Starting Cloudflare bypass.')
