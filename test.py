@@ -27,7 +27,7 @@ def get_chromium_options(browser_path: str, arguments: list, proxy_server_url: s
     
     # Set up proxy if provided
     if proxy_server_url:
-        options.set_argument(f'--proxy-server=http://rrest751_gmail_com-country-any-sid-gpznmocq-filter-medium:bbfefr2wyj@gate.nodemaven.com:8080')
+        options.set_argument(f'--proxy-server=http://gate.nodemaven.com:8080')
     
     for argument in arguments:
         options.set_argument(argument)
@@ -47,7 +47,7 @@ def main():
     browser_path = os.getenv('CHROME_PATH', "/usr/bin/google-chrome")
 
     # Proxy URL (you can replace this with your actual proxy URL)
-    proxy_server_url = "https://rrest751_gmail_com-country-any-sid-gpznmocq-filter-medium:bbfefr2wyj@gate.nodemaven.com:8080"
+    proxy_server_url = "http://rgate.nodemaven.com:8080"
 
 
     # Browser arguments to make the browser better for automation and less detectable
@@ -74,6 +74,13 @@ def main():
     driver = ChromiumPage(addr_or_opts=options)
     
     try:
+
+        
+  driver.authenticate({        
+        username: 'rrest751_gmail_com-country-any-sid-gpznmocq-filter-medium',
+        password: 'bbfefr2wyj'
+ })
+
         logging.info('Navigating to the demo page.')
         driver.get('https://whatsmyip.org')
 
