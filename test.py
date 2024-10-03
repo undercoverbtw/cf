@@ -30,7 +30,7 @@ def get_chromium_options(browser_path: str, arguments: list) -> ChromiumOptions:
     options = ChromiumOptions()
     options.set_argument('--auto-open-devtools-for-tabs', 'true') # we don't need this anymore
     options.set_paths(browser_path=browser_path)
-   proxy_server_url = "gate.nodemaven.com:8080:rrest751_gmail_com-country-any-sid-4yhlgmjecjvf9n5-filter-medium:bbfefr2wyj"
+   proxy_server_url = "rrest751_gmail_com-country-any-sid-puguczcek6urx5-filter-medium:bbfefr2wyj@gate.nodemaven.com:8080"
 options.add_argument(f'--proxy-server={proxy_server_url}')
     for argument in arguments:
         options.set_argument(argument)
