@@ -75,11 +75,9 @@ def main():
     
     try:
 
-        
-  driver.authenticate({        
-        username: 'rrest751_gmail_com-country-any-sid-gpznmocq-filter-medium',
-        password: 'bbfefr2wyj',
- })
+        username = 'rrest751_gmail_com-country-any-sid-gpznmocq-filter-medium'
+        password = 'bbfefr2wyj'
+  driver.authenticate(username, password)
 
         logging.info('Navigating to the demo page.')
         driver.get('https://whatsmyip.org')
