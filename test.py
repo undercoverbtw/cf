@@ -27,7 +27,7 @@ def get_chromium_options(browser_path: str, arguments: list, proxy_server_url: s
     
     # Set up proxy if provided
     if proxy_server_url:
-        options.set_argument(f'--proxy-server=rrest751_gmail_com-country-any-sid-gpznmocq-filter-medium:bbfefr2wyj@gate.nodemaven.com:8080')
+        options.set_argument(f'--proxy-server=http://rrest751_gmail_com-country-any-sid-gpznmocq-filter-medium:bbfefr2wyj@gate.nodemaven.com:8080')
     
     for argument in arguments:
         options.set_argument(argument)
