@@ -22,7 +22,7 @@ def get_chromium_options(browser_path: str, arguments: list) -> ChromiumOptions:
     :return: Configured ChromiumOptions instance.
     """
 
-    PROXY = "rrest751_gmail_com-country-any-sid-0hp5woysz6s8codha77x-filter-medium:bbfefr2wyj@gate.nodemaven.com:8080" # IP:PORT or HOST:PORT
+    PROXY = "rrest751_gmail_com-country-any-sid-xr6urblxn-filter-medium:bbfefr2wyj@gate.nodemaven.com:8080" # IP:PORT or HOST:PORT
 
 
 
