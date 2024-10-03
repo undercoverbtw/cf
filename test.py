@@ -23,10 +23,13 @@ def get_chromium_options(browser_path: str, arguments: list) -> ChromiumOptions:
     :param arguments: List of arguments for the Chromium browser.
     :return: Configured ChromiumOptions instance.
     """
-    host = "127.0.0.1"
-    port = "8080"
+    host = "31.223.188.160"
+    port = "5837"
+    username = "aangympq"
+    password = "xev6loydcusc"
+    
     options = ChromiumOptions()
-    options.set_argument('--proxy-server', '{host}:{port}')
+    options.set_argument('--proxy-server', '{host}:{port}@{username}:{password}')
     options.set_argument('--auto-open-devtools-for-tabs', 'true') # we don't need this anymore
     options.set_paths(browser_path=browser_path)
     for argument in arguments:
