@@ -30,7 +30,7 @@ def get_chromium_options(browser_path: str, arguments: list) -> ChromiumOptions:
     options = ChromiumOptions()
     options.set_argument('--auto-open-devtools-for-tabs', 'true') # we don't need this anymore
     options.set_paths(browser_path=browser_path)
-    options.add_argument('--proxy-server=%s' % PROXY)
+    options.set_argument('--proxy-server=%s' % PROXY)
     for argument in arguments:
         options.set_argument(argument)
     return options
