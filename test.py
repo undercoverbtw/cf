@@ -51,7 +51,7 @@ def main():
     # browser_path = os.getenv('CHROME_PATH', r"C:/Program Files/Google/Chrome/Application/chrome.exe")
 
     # Optional: Add proxy from environment variable
-    proxy = os.getenv('PROXY', 'rrest751_gmail_com-country-any-sid-bgnirgzi9anklat-filter-medium:bbfefr2wyj@gate.nodemaven.com:8080')  # Example: 'username:password@proxy_host:proxy_port' or 'proxy_host:proxy_port'
+    proxy = os.getenv('PROXY', "http://rrest751_gmail_com-country-any-sid-bgnirgzi9anklat-filter-medium:bbfefr2wyj@gate.nodemaven.com:8080")  # Example: 'username:password@proxy_host:proxy_port' or 'proxy_host:proxy_port'
 
     # Arguments to make the browser better for automation and less detectable.
     arguments = [
@@ -76,7 +76,7 @@ def main():
     driver = ChromiumPage(addr_or_opts=options)
     try:
         logging.info('Navigating to the demo page.')
-        driver.get('https://nopecha.com/demo/cloudflare')
+        driver.get('https://gota.io/web')
 
         # Where the bypass starts
         logging.info('Starting Cloudflare bypass.')
