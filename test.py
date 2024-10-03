@@ -29,7 +29,7 @@ def get_chromium_options(browser_path: str, arguments: list) -> ChromiumOptions:
 
 
     PROXY_FOLDER = os.path.join('extension', 'proxy_folder')
-PROXY_HOST = *.*.*.*"
+PROXY_HOST = "127.0.0.1"
 PROXY_PORT = "1234"
 PROXY_USER = "username"
 PROXY_PASS = "password"
