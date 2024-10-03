@@ -1,3 +1,4 @@
+import time
 import logging
 import os
 from CloudflareBypasser import CloudflareBypasser
@@ -13,44 +14,37 @@ logging.basicConfig(
     ]
 )
 
-def get_chromium_options(browser_path: str, arguments: list, proxy_server_url: str = None) -> ChromiumOptions:
+def get_chromium_options(browser_path: str, arguments: list) -> ChromiumOptions:
     """
-    Configures and returns Chromium options, including proxy settings if provided.
+    Configures and returns Chromium options.
     
     :param browser_path: Path to the Chromium browser executable.
     :param arguments: List of arguments for the Chromium browser.
-    :param proxy_server_url: Proxy address in the form 'host:port', with optional 'username:password@host:port'.
     :return: Configured ChromiumOptions instance.
     """
     options = ChromiumOptions()
+    options.set_argument('--auto-open-devtools-for-tabs', 'true') # we don't need this anymore
     options.set_paths(browser_path=browser_path)
-    
-    # Set up proxy if provided
-    if proxy_server_url:
-        options.set_argument(f'--proxy-server=http://gate.nodemaven.com:8080')
-    
     for argument in arguments:
         options.set_argument(argument)
-    
     return options
 
 def main():
-    # Check if the browser should run in headless mode
+    # Chromium Browser Path
     isHeadless = os.getenv('HEADLESS', 'false').lower() == 'true'
     
     if isHeadless:
         from pyvirtualdisplay import Display
+
         display = Display(visible=0, size=(1920, 1080))
         display.start()
 
-    # Path to the Chromium browser executable
     browser_path = os.getenv('CHROME_PATH', "/usr/bin/google-chrome")
+    
+    # Windows Example
+    # browser_path = os.getenv('CHROME_PATH', r"C:/Program Files/Google/Chrome/Application/chrome.exe")
 
-    # Proxy URL (you can replace this with your actual proxy URL)
-    proxy_server_url = "http://gate.nodemaven.com:8080"
-
-
-    # Browser arguments to make the browser better for automation and less detectable
+    # Arguments to make the browser better for automation and less detectable.
     arguments = [
         "-no-first-run",
         "-force-color-profile=srgb",
@@ -65,43 +59,36 @@ def main():
         "-deny-permission-prompts",
         "-disable-gpu",
         "-accept-lang=en-US",
+        "-proxy-server=http://gate.nodemaven.com:8080@rrest751_gmail_com-country-any-sid-feczrtiz2i-filter-medium:bbfefr2wyj)"
     ]
 
-    # Get configured Chromium options with proxy
-    options = get_chromium_options(browser_path, arguments, proxy_server_url)
+    options = get_chromium_options(browser_path, arguments)
 
     # Initialize the browser
     driver = ChromiumPage(addr_or_opts=options)
-    
     try:
-
-        username = 'rrest751_gmail_com-country-any-sid-gpznmocq-filter-medium'
-        password = 'bbfefr2wyj'
-  driver.authenticate(username, password)
-
         logging.info('Navigating to the demo page.')
-        driver.get('https://whatsmyip.org')
+        driver.get('https://nopecha.com/demo/cloudflare')
 
-        # Start Cloudflare bypass
+        # Where the bypass starts
         logging.info('Starting Cloudflare bypass.')
         cf_bypasser = CloudflareBypasser(driver)
 
-        # Bypass Cloudflare if needed
+        # If you are solving an in-page captcha (like the one here: https://seleniumbase.io/apps/turnstile), use cf_bypasser.click_verification_button() directly instead of cf_bypasser.bypass().
+        # It will automatically locate the button and click it. Do your own check if needed.
+
         cf_bypasser.bypass()
 
-        # Log the page title to confirm success
+        logging.info("Enjoy the content!")
         logging.info("Title of the page: %s", driver.title)
 
         # Sleep for a while to let the user see the result if needed
         time.sleep(5)
-
     except Exception as e:
         logging.error("An error occurred: %s", str(e))
-    
     finally:
         logging.info('Closing the browser.')
-        driver.quit()  # Ensure browser closes properly
-        
+        driver.quit()
         if isHeadless:
             display.stop()
 
