@@ -59,7 +59,7 @@ def main():
         "-deny-permission-prompts",
         "-disable-gpu",
         "-accept-lang=en-US",
-        "-proxy-server=http://rrest751_gmail_com-country-any-sid-tgbiqqtknnqytz-filter-medium:bbfefr2wyj@gate.nodemaven.com:8080'
+        "-proxy-server=http://rrest751_gmail_com-country-any-sid-tgbiqqtknnqytz-filter-medium:bbfefr2wyj@gate.nodemaven.com:8080"
     ]
 
     options = get_chromium_options(browser_path, arguments)
