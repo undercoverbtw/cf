@@ -23,74 +23,12 @@ def get_chromium_options(browser_path: str, arguments: list) -> ChromiumOptions:
     :param arguments: List of arguments for the Chromium browser.
     :return: Configured ChromiumOptions instance.
     """
+    host = "127.0.0.1"
+    port = "8080"
     options = ChromiumOptions()
+    options.add_argument('--proxy-server={host}:{port}')
     options.set_argument('--auto-open-devtools-for-tabs', 'true') # we don't need this anymore
     options.set_paths(browser_path=browser_path)
-
-
-    PROXY_FOLDER = os.path.join('extension', 'proxy_folder')
-PROXY_HOST = "127.0.0.1"
-PROXY_PORT = "1234"
-PROXY_USER = "username"
-PROXY_PASS = "password"
-manifest_json = """
-{
-    "version": "1.0.0",
-    "manifest_version": 2,
-    "name": "Chrome Proxy",
-    "permissions": [
-        "proxy",
-        "tabs",
-        "unlimitedStorage",
-        "storage",
-        "<all_urls>",
-        "webRequest",
-        "webRequestBlocking"
-    ],
-    "background": {
-        "scripts": ["background.js"]
-    },
-    "minimum_chrome_version":"22.0.0"
-}
-"""
-
-background_js = """
-var config = {
-        mode: "fixed_servers",
-        rules: {
-        singleProxy: {
-            scheme: "http",
-            host: "%s",
-            port: parseInt(%s)
-        },
-        bypassList: ["localhost"]
-        }
-    };
-
-chrome.proxy.settings.set({value: config, scope: "regular"}, function() {});
-
-function callbackFn(details) {
-    return {
-        authCredentials: {
-            username: "%s",
-            password: "%s"
-        }
-    };
-}
-
-chrome.webRequest.onAuthRequired.addListener(
-            callbackFn,
-            {urls: ["<all_urls>"]},
-            ['blocking']
-);
-""" % (PROXY_HOST, PROXY_PORT, PROXY_USER, PROXY_PASS)
-with open(f"{PROXY_FOLDER}/manifest.json","w") as f:
-    f.write(manifest_json)
-with open(f"{PROXY_FOLDER}/background.js","w") as f:
-    f.write(background_js)   
-    
-    
-  options.set_argument(f'--load-extension={PROXY_FOLDER}')  
     for argument in arguments:
         options.set_argument(argument)
     return options
