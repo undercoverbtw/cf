@@ -25,6 +25,7 @@ def get_chromium_options(browser_path: str, arguments: list) -> ChromiumOptions:
     """
     host = "31.223.188.160"
     port = "5837"
+    
     username = "aangympq"
     password = "xev6loydcusc"
     
@@ -35,7 +36,7 @@ def get_chromium_options(browser_path: str, arguments: list) -> ChromiumOptions:
     
     options.set_argument('--auto-open-devtools-for-tabs', 'true') # we don't need this anymore
  # Set the proxy with authentication
-    options.set_argument(f'--proxy-server=http://{proxy}@{proxy_auth}@')
+    options.set_argument(f'--proxy-server=http://{proxy}@{proxy_auth}')
     options.set_paths(browser_path=browser_path)
     for argument in arguments:
         options.set_argument(argument)
