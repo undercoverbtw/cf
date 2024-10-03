@@ -31,9 +31,9 @@ def get_chromium_options(browser_path: str, arguments: list) -> ChromiumOptions:
     
     proxy = "{username}:{password}@{host}:{port}"
     proxy_auth = f"adad"
-
+cwd = os.getcwd()
       # Path to the Chrome extension that handles proxy authentication
-    extension_path = ''
+    extension_path = cwd
     
     options = ChromiumOptions()
     
